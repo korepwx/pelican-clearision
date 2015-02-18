@@ -1,0 +1,27 @@
+{% from "_includes/_defaults.html" import MATHJAX_URL with context %}
+<script type="text/javascript" src="{{ MATHJAX_URL }}">
+  MathJax.Hub.Config({
+    config: ['MMLorHTML.js'],
+    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+    jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
+    displayAlign: 'center',
+    displayIndent: '0em',
+    showMathMenu: 'true',
+    tex2jax: {
+      inlineMath: [ ['\\(','\\)'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+      preview: 'TeX',
+    },
+    'HTML-CSS': {
+      {% from "_includes/_defaults.html" import CLEARISION_ENABLE_OPACITY with context %}
+      {% if CLEARISION_ENABLE_OPACITY %}
+      {% set font_color = "white" %}
+      {% else %}
+      {% set font_color = "black" %}
+      {% endif %}
+      styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '{{ font_color }} ! important'} }
+    }
+  });
+</script>

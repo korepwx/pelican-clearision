@@ -1,0 +1,8 @@
+{% extends "_includes/article_list.html" %}
+
+{% from "_includes/_defaults.html" import ARTICLES_BY_LABEL with context %}
+{% block subtitle %}{{ ARTICLES_BY_LABEL | format(author=author) }}{% endblock %}
+
+{% block content_title %}
+  <div class="heading">{{ ARTICLES_BY_LABEL | format(author=author) }}</div>
+{% endblock %}

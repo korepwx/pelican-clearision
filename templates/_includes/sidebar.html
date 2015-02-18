@@ -1,0 +1,41 @@
+<div id="sidebar">
+
+<div class="widget" id="one">
+  <!-- Archive pages start here -->
+  {% from "_includes/_defaults.html" import ARCHIVES_LABEL with context %}
+  {% from "_includes/_defaults.html" import ALL_ARCHIVES_LABEL, ARCHIVES_URL with context %}
+  {% from "_includes/_defaults.html" import ALL_CATEGORIES_LABEL, CATEGORIES_URL with context %}
+  {% from "_includes/_defaults.html" import ALL_TAGS_LABEL, TAGS_URL with context %}
+  {% from "_includes/_defaults.html" import ALL_AUTHORS_LABEL, AUTHORS_URL with context %}
+  <h2>{{ ARCHIVES_LABEL }}</h2>
+    <ul>
+      <li><a href="{{ SITEURL }}/{{ ARCHIVES_URL }}" title="">{{ ALL_ARCHIVES_LABEL }}</a></li>
+      <li><a href="{{ SITEURL }}/{{ CATEGORIES_URL }}" title="">{{ ALL_CATEGORIES_LABEL }}</a></li>
+      <li><a href="{{ SITEURL }}/{{ TAGS_URL }}" title="">{{ ALL_TAGS_LABEL }}</a></li>
+      <li><a href="{{ SITEURL }}/{{ AUTHORS_URL }}" title="">{{ ALL_AUTHORS_LABEL }}</a></li>
+    </ul>
+  <!-- Links start here -->
+  {% from "_includes/_defaults.html" import LINKS, LINKS_LABEL with context %}
+  {% if LINKS %}
+  <h2>{{ LINKS_LABEL }}</h2>
+    <ul>
+      {% for label, link in LINKS %}
+      <li><a href="{{ link }}" title="{{ label|striptags|e }}">{{ label }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+
+<div class="widget" id="two">
+  <!-- Tag cloud start -->
+  {% from "_includes/_defaults.html" import TAG_CLOUD_LABEL with context %}
+  <h2>{{ TAG_CLOUD_LABEL }}</h2>
+  <div class="tagcloud">
+    {% for tag in tag_cloud|sort %}
+      <a href="{{ SITEURL }}/{{ tag.0.url }}" class="tag tag-{{ tag.1 }}">{{ tag.0 }}</a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="clearfix"></div>
+</div>

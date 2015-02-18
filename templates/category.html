@@ -1,0 +1,8 @@
+{% extends "_includes/article_list.html" %}
+
+{% from "_includes/_defaults.html" import ARCHIVES_LABEL with context %}
+{% block subtitle %}{{ category.name }} {{ ARCHIVES_LABEL }}{% endblock %}
+
+{% block content_title %}
+  <div class="heading">{{ category.name }} {{ ARCHIVES_LABEL }}</div>
+{% endblock %}

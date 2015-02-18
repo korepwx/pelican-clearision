@@ -1,0 +1,382 @@
+{# Give the site icon which will be displayed at left top corner. #}
+{% if not SITE_ICON %}
+{% set SITE_ICON = SITEURL + '/theme/img/logo.jpg' %}
+{% else %}
+{% set SITE_ICON = SITE_ICON %}
+{% endif %}
+
+{# Description of your site. It is used in meta tags so it will appear in
+search results and social media #}
+{% if not SITE_DESCRIPTION %}
+{% set SITE_DESCRIPTION = '' %}
+{% else %}
+{% set SITE_DESCRIPTION = SITE_DESCRIPTION %}
+{% endif %}
+
+{# The list of links #}
+{% if not LINKS %}
+{% set LINKS = [] %}
+{% else %}
+{% set LINKS = LINKS %}
+{% endif %}
+
+{# The main rss feed url #}
+{% if not MAIN_RSS_FEED %}
+{% set MAIN_RSS_FEED = '' %}
+{% else %}
+{% set MAIN_RSS_FEED = MAIN_RSS_FEED %}
+{% endif %}
+
+{# Thumbnail image to show when homepage is shared on social media. It also
+serves as the default image for posts whose featured_image is not set. #}
+{% if not FEATURED_IMAGE %}
+{% set FEATURED_IMAGE = '' %}
+{% else %}
+{% set FEATURED_IMAGE = FEATURED_IMAGE %}
+{% endif %}
+
+{# It is displayed along with the SITENAME in the footer of every page #}
+{% if not SITE_SUBTITLE %}
+{% set SITE_SUBTITLE = '' %}
+{% else %}
+{% set SITE_SUBTITLE = SITE_SUBTITLE %}
+{% endif %}
+
+{# Whether the SITE_SUBTITLE should be treated as pre-formatted html? #}
+{% if not SITE_SUBTITLE_IS_HTML %}
+{% set SITE_SUBTITLE_IS_HTML = False %}
+{% else %}
+{% set SITE_SUBTITLE_IS_HTML = SITE_SUBTITLE_IS_HTML %}
+{% endif %}
+
+{# Set it to True to display favicon and speed dial icon. Also make sure that
+you have placed images in the appropriate directory and defined STATIC_PATHS
+accordingly #}
+{% if not USE_SHORTCUT_ICONS %}
+{% set USE_SHORTCUT_ICONS = False %}
+{% else %}
+{% set USE_SHORTCUT_ICONS = USE_SHORTCUT_ICONS %}
+{% endif %}
+
+{# Whether or not to use opacity style? #}
+{% if not CLEARISION_ENABLE_OPACITY %}
+{% set CLEARISION_ENABLE_OPACITY = False %}
+{% else %}
+{% set CLEARISION_ENABLE_OPACITY = CLEARISION_ENABLE_OPACITY %}
+{% endif %}
+
+{# Define the background image of this theme when CLEARISION_ENABLE_OPACITY is enabled #}
+{% if not BACKGROUND_IMAGE %}
+{% set BACKGROUND_IMAGE = '' %}
+{% else %}
+{% set BACKGROUND_IMAGE = BACKGROUND_IMAGE %}
+{% endif %}
+
+{# Label for not found #}
+{% if not NOT_FOUND_LABEL %}
+{% set NOT_FOUND_LABEL = '找不到页面' %}
+{% else %}
+{% set NOT_FOUND_LABEL = NOT_FOUND_LABEL %}
+{% endif %}
+
+{# Label for recommend search #}
+{% if not RECOMMEND_SEARCH_LABEL %}
+{% set RECOMMEND_SEARCH_LABEL = '您可以尝试右上角的搜索，或者通过左侧的链接随便逛逛。' %}
+{% else %}
+{% set RECOMMEND_SEARCH_LABEL = RECOMMEND_SEARCH_LABEL %}
+{% endif %}
+
+{# Label for the list of comments #}
+{% if not COMMENTS_LABEL %}
+{% set COMMENTS_LABEL = '评论' %}
+{% else %}
+{% set COMMENTS_LABEL = COMMENTS_LABEL %}
+{% endif %}
+
+{# Label for "LINKS" #}
+{% if not LINKS_LABEL %}
+{% set LINKS_LABEL = '友情链接' %}
+{% else %}
+{% set LINKS_LABEL = LINKS_LABEL %}
+{% endif %}
+
+{# Label for "TAG CLOUD" #}
+{% if not TAG_CLOUD_LABEL %}
+{% set TAG_CLOUD_LABEL = '标签云' %}
+{% else %}
+{% set TAG_CLOUD_LABEL = TAG_CLOUD_LABEL %}
+{% endif %}
+
+{# Label for the list of related posts #}
+{% if not RELATED_POSTS_LABEL %}
+{% set RELATED_POSTS_LABEL = '相关文章' %}
+{% else %}
+{% set RELATED_POSTS_LABEL = RELATED_POSTS_LABEL %}
+{% endif %}
+
+{# Label for "Read More" #}
+{% if not READ_MORE_LABEL %}
+{% set READ_MORE_LABEL = '继续阅读 →' %}
+{% else %}
+{% set READ_MORE_LABEL = READ_MORE_LABEL %}
+{% endif %}
+
+{# Label for "Previous Page" #}
+{% if not PREV_PAGE_LABEL %}
+{% set PREV_PAGE_LABEL = '上一页' %}
+{% else %}
+{% set PREV_PAGE_LABEL = PREV_PAGE_LABEL %}
+{% endif %}
+
+{# Label for "Next Page" #}
+{% if not NEXT_PAGE_LABEL %}
+{% set NEXT_PAGE_LABEL = '下一页' %}
+{% else %}
+{% set NEXT_PAGE_LABEL = NEXT_PAGE_LABEL %}
+{% endif %}
+
+{# Label for "Archives" #}
+{% if not ARCHIVES_LABEL %}
+{% set ARCHIVES_LABEL = '归档' %}
+{% else %}
+{% set ARCHIVES_LABEL = ARCHIVES_LABEL %}
+{% endif %}
+
+{# Label for "All Archives" #}
+{% if not ALL_ARCHIVES_LABEL %}
+{% set ALL_ARCHIVES_LABEL = '所有文章' %}
+{% else %}
+{% set ALL_ARCHIVES_LABEL = ALL_ARCHIVES_LABEL %}
+{% endif %}
+
+{# Label for "All Tags" #}
+{% if not ALL_TAGS_LABEL %}
+{% set ALL_TAGS_LABEL = '所有标签' %}
+{% else %}
+{% set ALL_TAGS_LABEL = ALL_TAGS_LABEL %}
+{% endif %}
+
+{# Label for "All Categories" #}
+{% if not ALL_CATEGORIES_LABEL %}
+{% set ALL_CATEGORIES_LABEL = '所有分类' %}
+{% else %}
+{% set ALL_CATEGORIES_LABEL = ALL_CATEGORIES_LABEL %}
+{% endif %}
+
+{# Label for "All Categories" #}
+{% if not ALL_AUTHORS_LABEL %}
+{% set ALL_AUTHORS_LABEL = '所有作者' %}
+{% else %}
+{% set ALL_AUTHORS_LABEL = ALL_AUTHORS_LABEL %}
+{% endif %}
+
+{# Label for "Search" #}
+{% if not SEARCH_LABEL %}
+{% set SEARCH_LABEL = '搜索' %}
+{% else %}
+{% set SEARCH_LABEL = SEARCH_LABEL %}
+{% endif %}
+
+{# Label for "Search Results" #}
+{% if not SEARCH_RESULTS_LABEL %}
+{% set SEARCH_RESULTS_LABEL = '搜索结果' %}
+{% else %}
+{% set SEARCH_RESULTS_LABEL = SEARCH_RESULTS_LABEL %}
+{% endif %}
+
+{# Label for "Searching, please wait ..." #}
+{% if not WAIT_FOR_SEARCH_LABEL %}
+{% set WAIT_FOR_SEARCH_LABEL = '正在搜索，请稍候…' %}
+{% else %}
+{% set WAIT_FOR_SEARCH_LABEL = WAIT_FOR_SEARCH_LABEL %}
+{% endif %}
+
+{# Label for "No query string provided." #}
+{% if not NO_QUERY_LABEL %}
+{% set NO_QUERY_LABEL = '您没有输入查询串。' %}
+{% else %}
+{% set NO_QUERY_LABEL = NO_QUERY_LABEL %}
+{% endif %}
+
+{# Label for "No result corresponds to query." #}
+{% if not NO_RESULT_LABEL %}
+{% set NO_RESULT_LABEL = '没有任何条目满足查询串。' %}
+{% else %}
+{% set NO_RESULT_LABEL = NO_RESULT_LABEL %}
+{% endif %}
+
+{# Label for "Service unavailable." #}
+{% if not SERVICE_UNAVAILABLE_LABEL %}
+{% set SERVICE_UNAVAILABLE_LABEL = '服务器错误，请稍后再试。' %}
+{% else %}
+{% set SERVICE_UNAVAILABLE_LABEL = SERVICE_UNAVAILABLE_LABEL %}
+{% endif %}
+
+{# Label for "Unrelated results are ignored." #}
+{% if not UNRELATED_REMOVED_LABEL %}
+{% set UNRELATED_REMOVED_LABEL = '已去除重复和不相关的结果。' %}
+{% else %}
+{% set UNRELATED_REMOVED_LABEL = UNRELATED_REMOVED_LABEL %}
+{% endif %}
+
+{# Label for "Articles by %(author)s" #}
+{% if not ARTICLES_BY_LABEL %}
+{% set ARTICLES_BY_LABEL = '%(author)s的文章' %}
+{% else %}
+{% set ARTICLES_BY_LABEL = ARTICLES_BY_LABEL %}
+{% endif %}
+
+{# Label for "%(year)s" #}
+{% if not YEAR_LABEL %}
+{% set YEAR_LABEL = '%(year)s年' %}
+{% else %}
+{% set YEAR_LABEL = YEAR_LABEL %}
+{% endif %}
+
+{# Label for "%(year)s/%(month)s" #}
+{% if not YEAR_MONTH_LABEL %}
+{% set YEAR_MONTH_LABEL = '%(year)s年%(month)s' %}
+{% else %}
+{% set YEAR_MONTH_LABEL = YEAR_MONTH_LABEL %}
+{% endif %}
+
+{# Label for "%(year)s/%(month)s/%(day)s" #}
+{% if not YEAR_MONTH_DAY_LABEL %}
+{% set YEAR_MONTH_DAY_LABEL = '%(year)s年%(month)s%(day)s日' %}
+{% else %}
+{% set YEAR_MONTH_DAY_LABEL = YEAR_MONTH_DAY_LABEL %}
+{% endif %}
+
+{# Default message for password prompt in content #}
+{% if not NEED_PASSWORD_LABEL %}
+{% set NEED_PASSWORD_LABEL = '这篇文章受到密码保护，请输入密码阅读此文章。' %}
+{% else %}
+{% set NEED_PASSWORD_LABEL = NEED_PASSWORD_LABEL %}
+{% endif %}
+
+{# Default message for password error #}
+{% if not PASSWORD_ERROR_LABEL %}
+{% set PASSWORD_ERROR_LABEL = '密码错误。' %}
+{% else %}
+{% set PASSWORD_ERROR_LABEL = PASSWORD_ERROR_LABEL %}
+{% endif %}
+
+{# Default message for enter password button in content #}
+{% if not ENTER_PASSWORD_LABEL %}
+{% set ENTER_PASSWORD_LABEL = '输入密码' %}
+{% else %}
+{% set ENTER_PASSWORD_LABEL = ENTER_PASSWORD_LABEL %}
+{% endif %}
+
+{# Default style for markdown highlighted codes #}
+{% if not PYGMENTS_STYLE %}
+{% set PYGMENTS_STYLE = 'monokai' %}
+{% else %}
+{% set PYGMENTS_STYLE = PYGMENTS_STYLE %}
+{% endif %}
+
+{# The sitename for duoshuo comment system #}
+{% if not DUOSHUO_SITENAME %}
+{% set DUOSHUO_SITENAME = '' %}
+{% else %}
+{% set DUOSHUO_SITENAME = DUOSHUO_SITENAME %}
+{% endif %}
+
+{# Whether or not to use customized sidebar? #}
+{% if not CUSTOM_SIDEBAR %}
+{% set CUSTOM_SIDEBAR = False %}
+{% else %}
+{% set CUSTOM_SIDEBAR = CUSTOM_SIDEBAR %}
+{% endif %}
+
+{# The default url for archives.html #}
+{% if not ARCHIVES_URL %}
+{% set ARCHIVES_URL = 'archives.html' %}
+{% else %}
+{% set ARCHIVES_URL = ARCHIVES_URL %}
+{% endif %}
+
+{# The default url for authors.html #}
+{% if not AUTHORS_URL %}
+{% set AUTHORS_URL = 'authors.html' %}
+{% else %}
+{% set AUTHORS_URL = AUTHORS_URL %}
+{% endif %}
+
+{# The default url for categories.html #}
+{% if not CATEGORIES_URL %}
+{% set CATEGORIES_URL = 'categories.html' %}
+{% else %}
+{% set CATEGORIES_URL = CATEGORIES_URL %}
+{% endif %}
+
+{# The default url for tags.html #}
+{% if not TAGS_URL %}
+{% set TAGS_URL = 'tags.html' %}
+{% else %}
+{% set TAGS_URL = TAGS_URL %}
+{% endif %}
+
+{# The baidu custom search id #}
+{% if not BAIDU_CUSTOM_SEARCH %}
+{% set BAIDU_CUSTOM_SEARCH = '' %}
+{% else %}
+{% set BAIDU_CUSTOM_SEARCH = BAIDU_CUSTOM_SEARCH %}
+{% endif %}
+
+{# The baidu custom search domain #}
+{% if not BAIDU_SEARCH_DOMAIN %}
+{% set BAIDU_SEARCH_DOMAIN = '' %}
+{% else %}
+{% set BAIDU_SEARCH_DOMAIN = BAIDU_SEARCH_DOMAIN %}
+{% endif %}
+
+{# The google custom search id #}
+{% if not GOOGLE_CUSTOM_SEARCH %}
+{% set GOOGLE_CUSTOM_SEARCH = '' %}
+{% else %}
+{% set GOOGLE_CUSTOM_SEARCH = GOOGLE_CUSTOM_SEARCH %}
+{% endif %}
+
+{# The google custom search domain #}
+{% if not GOOGLE_SEARCH_DOMAIN %}
+{% set GOOGLE_SEARCH_DOMAIN = '' %}
+{% else %}
+{% set GOOGLE_SEARCH_DOMAIN = GOOGLE_SEARCH_DOMAIN %}
+{% endif %}
+
+{# The search query url #}
+{% if not SEARCH_QUERY_URL %}
+{% set SEARCH_QUERY_URL = '' %}
+{% set SEARCH_QUERY_KEY = '' %}
+{% else %}
+{% set SEARCH_QUERY_URL = SEARCH_QUERY_URL %}
+{% endif %}
+
+{# The search query parameter key #}
+{% if not SEARCH_QUERY_KEY %}
+{% set SEARCH_QUERY_KEY = '' %}
+{% else %}
+{% set SEARCH_QUERY_KEY = SEARCH_QUERY_KEY %}
+{% endif %}
+
+{# The search api url template #}
+{% if not SEARCH_API_URL %}
+{% set SEARCH_API_URL = '' %}
+{% else %}
+{% set SEARCH_API_URL = SEARCH_API_URL %}
+{% endif %}
+
+{# The jquery library url #}
+{% if not JQUERY_CDN_URL %}
+{% set JQUERY_URL = SITEURL + '/theme/js/jquery.2.1.3.min.js' %}
+{% else %}
+{% set JQUERY_URL = JQUERY_CDN_URL %}
+{% endif %}
+
+{# The mathjax library url #}
+{% if not MATHJAX_URL %}
+{% set MATHJAX_URL = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' %}
+{% else %}
+{% set MATHJAX_URL = MATHJAX_URL %}
+{% endif %}

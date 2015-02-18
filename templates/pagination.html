@@ -1,0 +1,46 @@
+{% if DEFAULT_PAGINATION %}
+{%- set start_page = articles_page.number - 5 -%}
+{%- if start_page <= 2 -%}
+  {%- set start_page = 1 -%}
+{%- endif -%}
+{%- set end_page = start_page + 9 -%}
+{%- if end_page > articles_paginator.num_pages -%}
+  {%- set end_page = articles_paginator.num_pages -%}
+  {%- set start_page = end_page - 9 -%}
+  {%- if start_page <= 2 -%}
+    {%- set start_page = 1 -%}
+  {%- endif -%}
+{%- endif -%}
+{% from "_includes/_defaults.html" import PREV_PAGE_LABEL, NEXT_PAGE_LABEL with context %}
+{% if articles_paginator.num_pages > 1 %}
+<div id="page_nav">
+  {% if articles_page.has_previous() %}
+  <a class="prev page-numbers" href="{{ SITEURL }}/{{ articles_previous_page.url }}">{{ PREV_PAGE_LABEL }}</a>
+  {% endif %}
+
+  {% if start_page > 1 %}
+  <a class="page-numbers" href="{{ SITEURL }}/{{ articles_paginator.page(1).url }}">{{ 1 }}</a>
+  <span>...</span>
+  {% endif %}
+
+  {% for idx in range(start_page, end_page+1) %}
+  {% if idx == articles_page.number %}
+  <span class="page-numbers current">{{ idx }}</span>
+  {% else %}
+  <a class="page-numbers" href="{{ SITEURL }}/{{ articles_paginator.page(idx).url }}">{{ idx }}</a>
+  {% endif %}
+  {% endfor %}
+
+  {% if end_page < articles_paginator.num_pages %}
+  {% if end_page < articles_paginator.num_pages - 1 %}
+  <span>...</span>
+  {% endif %}
+  <a class="page-numbers" href="{{ SITEURL }}/{{ articles_paginator.page(articles_paginator.num_pages).url }}">{{ articles_paginator.num_pages }}</a>
+  {% endif %}
+
+  {% if articles_page.has_next() %}
+  <a class="next page-numbers" href="{{ SITEURL }}/{{ articles_next_page.url }}">{{ NEXT_PAGE_LABEL }}</a>
+  {% endif %}
+</div>
+{% endif %}
+{% endif %}

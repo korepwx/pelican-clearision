@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% from "_includes/_defaults.html" import YEAR_LABEL, YEAR_MONTH_LABEL, YEAR_MONTH_DAY_LABEL with context %}
+{% macro show_date(p) %}
+  {%- if (p | count) == 1 -%}
+    {{ YEAR_LABEL | format(year=p[0]) }}
+  {%- elif (p | count) == 2 -%}
+    {{ YEAR_MONTH_LABEL | format(year=p[0], month=p[1]) }}
+  {%- else -%}
+    {{ YEAR_MONTH_DAY_LABEL | format(year=p[0], month=p[1], day=p[2]) }}
+  {%- endif -%}
+{% endmacro %}
+
+{% from "_includes/_defaults.html" import ARCHIVES_LABEL with context %}
+{% block subtitle %}{{ show_date(period) }} {{ ARCHIVES_LABEL }}{% endblock %}
+
+{% block content %}
+  <div class="heading">{{ show_date(period) }} {{ ARCHIVES_LABEL }}</div>
+
+  <dl id="archives">
+  {% set last_date = '' %}
+  {% for article in dates %}
+    {% if last_date != article.locale_date %}
+    {% set last_date = article.locale_date %}
+    <dt>{{ article.locale_date }}</dt>
+    {% endif %}
+    <dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
+  {% endfor %}
+  </dl>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% from "_includes/comment.html" import make_comment_count with context %}
+{% macro article_skeleton(article, summary_only) %}
+  <hgroup class="post_hctn">
+    <div class="post_time">
+      <div class="post_t_d">{{ article.date | strftime('%m/%d') }}</div>
+      <div class="post_t_u">{{ article.date | strftime('%H:%M') }}</div>
+    </div>
+    <div class="post_h_l">
+      <span class="post_ct"><a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></span>
+      {% for subcategory in article.subcategories %}
+        <span class="post_ct"><a href="{{ SITEURL }}/{{ subcategory.url }}">{{ subcategory.shortname }}</a></span>
+      {% endfor %}
+      <h2 class="post_h"><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
+      <div class="post_tag">
+        {% for author in article.authors %}
+        <span class="post_c"><a class="wp-postviews" href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a></span>
+        {% endfor %}
+        {% for tag in article.tags %}
+        <a href="{{ SITEURL }}/{{ tag.url }}" rel="tag">{{ tag }}</a>
+        {% endfor %}
+        {% from "_includes/_defaults.html" import COMMENT_COUNT_LABEL with context %}
+        <span class="post_c"><a href="{{ SITEURL }}/{{ article.url }}#comment">{{ make_comment_count(article, 'post' ) }}</a></span>
+      </div>
+    </div>
+  </hgroup>
+
+  <div class="post_t">
+    {% if summary_only %}
+    {{ article.summary }}
+    {% if article.summary != article.content %}
+    {% from "_includes/_defaults.html" import READ_MORE_LABEL with context %}
+    <p><a href="{{ SITEURL }}/{{ article.url }}" class="more-link">{{ READ_MORE_LABEL }}</a></p>
+    {% endif %}
+    {% else %}
+    {% if article.encrypted %}
+    <div id="encrypted-{{ article.slug }}" style="display: none;">{{ article.content }}</div>
+    <div id="decrypted-{{ article.slug }}">
+      <div class="decrypt-post">
+        {% from "_includes/_defaults.html" import NEED_PASSWORD_LABEL, ENTER_PASSWORD_LABEL with context %}
+        <div id="cleartext-{{ article.slug }}" class="cleartext">{{ article.cleartext | default(NEED_PASSWORD_LABEL) }}</div>
+        <input type="password" id="pwd-{{ article.slug }}" name="pwd-{{ article.slug }}" class="decrypt-password"
+               onkeypress="(event.keyCode == 13 ? DecryptPost('{{ article.slug }}') : null)">
+        <button onclick="DecryptPost('{{ article.slug }}');" class="decrypt-button">
+          {{ ENTER_PASSWORD_LABEL }}
+        </button>
+      </div>
+    </div>
+    {% else %}
+    {{ article.content }}
+    {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}

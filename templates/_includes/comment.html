@@ -1,0 +1,15 @@
+{% from "_includes/_defaults.html" import DUOSHUO_SITENAME, COMMENTS_LABEL with context %}
+{% macro make_comment_box(post, post_type) %}
+  {% if DUOSHUO_SITENAME %}
+  <div id="cmt" class="cmt">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="{{ post_type }}-{{ post.slug }}" data-title="{{ post.title|striptags|e }}" data-url="{{ SITEURL }}/{{ post.url }}"></div>
+    <!-- 多说评论框 end -->
+  </div>
+  {% endif %}
+{% endmacro %}
+{% macro make_comment_count(post, post_type) %}
+  {% if DUOSHUO_SITENAME %}
+  <span class="ds-thread-count" data-thread-key="{{ post_type }}-{{ post.slug }}" data-count-type="comments">{{ COMMENTS_LABEL }}</span>
+  {% endif %}
+{% endmacro %}

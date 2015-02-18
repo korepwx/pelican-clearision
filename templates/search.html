@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% from "_includes/_defaults.html" import SEARCH_LABEL with context %}
+{% block subtitle %}{{ SEARCH_LABEL }}{% endblock %}
+
+{% block content %}
+  {% from "_includes/_defaults.html" import WAIT_FOR_SEARCH_LABEL with context %}
+  <div id="results" class="search-results">
+    <p>{{ WAIT_FOR_SEARCH_LABEL }}</p>
+  </div>
+
+  {% from "_includes/_defaults.html" import NO_QUERY_LABEL, NO_RESULT_LABEL with context %}
+  <div id="no_query_string" style="display: none;"><p>{{ NO_QUERY_LABEL }}</p></div>
+  <div id="no_result_string" style="display: none;"><p>{{ NO_RESULT_LABEL }}</p></div>
+
+  {% from "_includes/_defaults.html" import SERVICE_UNAVAILABLE_LABEL with context %}
+  <div id="service_unavailable_string" style="display: none;"><p>{{ SERVICE_UNAVAILABLE_LABEL }}</p></div>
+
+  {% from "_includes/_defaults.html" import UNRELATED_REMOVED_LABEL with context %}
+  <div id="unrelated_removed_string" style="display: none;"><p>{{ UNRELATED_REMOVED_LABEL }}</p></div>
+{% endblock %}
+
+{% block tailscripts %}
+<script type="text/javascript" src="{{ SITEURL }}/theme/js/search.js"></script>
+<script type="text/javascript">
+  {% from "_includes/_defaults.html" import SEARCH_API_URL, SEARCH_QUERY_KEY with context %}
+  {% from "_includes/_defaults.html" import PREV_PAGE_LABEL, NEXT_PAGE_LABEL with context %}
+  initSearch("{{ SEARCH_API_URL }}", "{{ SEARCH_QUERY_KEY }}", "{{ PREV_PAGE_LABEL }}", "{{ NEXT_PAGE_LABEL }}");
+</script>
+{% endblock %}

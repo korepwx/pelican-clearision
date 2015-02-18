@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% from "_includes/_defaults.html" import NOT_FOUND_LABEL, RECOMMEND_SEARCH_LABEL with context %}
+{% block subtitle %}{{ NOT_FOUND_LABEL }}{% endblock %}
+
+{% block content %}
+<div class="single-page">
+  <div class="heading">{{ NOT_FOUND_LABEL }}</div>
+  <div class="content">
+    {{ RECOMMEND_SEARCH_LABEL }}
+  </div>
+</div>
+{% endblock %}

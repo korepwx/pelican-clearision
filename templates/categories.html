@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% from "_includes/_defaults.html" import ALL_CATEGORIES_LABEL with context %}
+{% block subtitle %}{{ ALL_CATEGORIES_LABEL }}{% endblock %}
+
+{% block content %}
+  {% from "_includes/_defaults.html" import ALL_CATEGORIES_LABEL with context %}
+  <div class="heading">{{ ALL_CATEGORIES_LABEL }}</div>
+  <ul id="allcategories">
+  {% for category, articles in categories %}
+    <li><a href="{{ SITEURL }}/{{ category.url }}">{{ category }}</a><sup>{{ articles|count }}</sup></li>
+  {% endfor %}
+  </ul>
+{% endblock %}

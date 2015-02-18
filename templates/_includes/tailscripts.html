@@ -1,0 +1,41 @@
+{% from "_includes/_defaults.html" import JQUERY_URL with context %}
+<script type="text/javascript" src="{{ JQUERY_URL }}"></script>
+
+{% from "_includes/_defaults.html" import DUOSHUO_SITENAME with context %}
+{% if DUOSHUO_SITENAME %}
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"{{ DUOSHUO_SITENAME }}"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+{% endif %}
+
+{% if (article and article.encrypted) or (page and page.encrypted) %}
+  <script type="text/javascript" src="{{ SITEURL }}/theme/js/gibberish-aes-1.0.0.min.js"></script>
+  <script type="text/javascript">
+    function DecryptPost(slug) {
+      try {
+        var ciphertext = $('#encrypted-' + slug).html();
+        var plaintext = GibberishAES.dec(ciphertext, $('#pwd-' + slug).val());
+        $('#decrypted-' + slug).html(plaintext);
+      } catch (e) {
+        {% from "_includes/_defaults.html" import PASSWORD_ERROR_LABEL with context %}
+        alert("{{ PASSWORD_ERROR_LABEL }}");
+      }
+    }
+  </script>
+{% endif %}
+
+{#
+{% if (article or page or articles) | math_enabled %}
+  {% include "_includes/mathjax.html" %}
+{% endif %}
+#}

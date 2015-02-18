@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% from "_includes/_defaults.html" import ALL_ARCHIVES_LABEL with context %}
+{% block subtitle %}{{ ALL_ARCHIVES_LABEL }}{% endblock %}
+
+{% block content %}
+  <div class="heading">{{ ALL_ARCHIVES_LABEL }}</div>
+
+  <dl id="archives">
+  {% set last_date = '' %}
+  {% for article in dates %}
+    {% if last_date != article.locale_date %}
+    {% set last_date = article.locale_date %}
+    <dt>{{ article.locale_date }}</dt>
+    {% endif %}
+    <dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
+  {% endfor %}
+  </dl>
+{% endblock %}

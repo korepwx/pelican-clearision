@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "_includes/article.html" import article_skeleton with context %}
+
+{% block content %}
+{% block content_title %}
+{% endblock %}
+
+{% for article in articles_page.object_list %}
+<article class="post">
+  {{ article_skeleton(article, True) }}
+</article>
+{% endfor %}
+
+{% include 'pagination.html' %}
+{% endblock content %}

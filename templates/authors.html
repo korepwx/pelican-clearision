@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% from "_includes/_defaults.html" import ALL_AUTHORS_LABEL with context %}
+{% block subtitle %}{{ ALL_AUTHORS_LABEL }}{% endblock %}
+
+{% block content %}
+  <div class="heading">{{ ALL_AUTHORS_LABEL }}</div>
+  <ul id="allauthors">
+  {% for author, articles in authors %}
+    <li><a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a><sup>{{ articles|count }}</sup></li>
+  {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% from "_includes/_defaults.html" import ALL_TAGS_LABEL with context %}
+{% block subtitle %}{{ ALL_TAGS_LABEL }}{% endblock %}
+
+{% block content %}
+  <div class="heading">{{ ALL_TAGS_LABEL }}</div>
+  <div id="alltags">
+    {%- for tag, articles in tags|sort %}
+    <span><a href="{{ SITEURL }}/{{ tag.url }}" class="tag">{{ tag }}</a><sup>{{ articles|count }}</sup></span>
+    {% endfor %}
+  </div>
+{% endblock %}

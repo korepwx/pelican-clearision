@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+<head>
+
+{% block head %}
+  <!-- Meta information about this page, the site and the author -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  {% if article and article.author %}
+  <meta name="author" content="{{ article.author }}" />
+  <meta name="copyright" content="{{ article.author }}" />
+  {% elif page and page.author %}
+  <meta name="author" content="{{ page.author }}" />
+  <meta name="copyright" content="{{ page.author }}" />
+  {% else %}
+  <meta name="author" content="{{ AUTHOR }}" />
+  <meta name="copyright" content="{{ AUTHOR }}" />
+  {% endif %}
+
+  {% from "_includes/_defaults.html" import SITE_DESCRIPTION with context %}
+  {% if SITE_DESCRIPTION %}
+  <meta name="description" content="{% block head_description %}{{ SITE_DESCRIPTION|e }}{% endblock head_description %}" />
+  {% endif %}
+
+  {# TODO: add more meta information here. can find an excellent guide from the elegant theme #}
+
+  {% block feed_links %}
+  {% include "_includes/feeds.html" %}
+  {% endblock feed_links %}
+  {% include "_includes/favicon_links.html" %}
+
+  <!-- Ordinary head elements start here -->
+  <title>{% block title %}{% block subtitle %}{% endblock %} - {{ SITENAME }}{% endblock %}</title>
+
+  {% block head_links %}
+  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/style.css" media="screen">
+  {% from "_includes/_defaults.html" import CLEARISION_ENABLE_OPACITY with context %}
+  {% if CLEARISION_ENABLE_OPACITY %}
+  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/style.opacity.css" media="screen">
+  {% if BACKGROUND_IMAGE %}
+  <style type="text/css">body { background-image: url("{{ BACKGROUND_IMAGE }}"); };</style>
+  {% endif %}
+  {% endif %}
+  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/pygments/{{ PYGMENTS_STYLE }}.css" media="screen">
+  {% endblock %}
+
+  {% include "_includes/analytics.html" %}
+{% endblock head %}
+</head>
+
+<body>
+
+<div id="page">
+
+<hgroup id="ctn_header">
+  {% from "_includes/_defaults.html" import SITE_SUBTITLE, SITE_SUBTITLE_IS_HTML with context %}
+  <div id="title">
+    <h1 id="site-title"><span><a href="{{ SITEURL }}/" title="{{ SITE_SUBTITLE|striptags|e }}" rel="home">{{ SITENAME }}</a></span></h1>
+    <h2 id="site-description">{% if SITE_SUBTITLE_IS_HTML %}{{ SITE_SUBTITLE|safe }}{% else %}{{ SITE_SUBTITLE }}{% endif %}</h2>
+  </div>
+  <div id="title_r">
+    <a href="/" target="_blank"><button class="tr_profile"></button></a>
+    {% for stype, slink in SOCIAL %}
+    <a href="{{ slink }}" target="_blank"><button class="tr_{{ stype }}"></button></a>
+    {% endfor %}
+
+    {% from "_includes/_defaults.html" import MAIN_RSS_FEED with context %}
+    {% if MAIN_RSS_FEED %}
+    <a href="{{ MAIN_RSS_FEED }}" target="_blank"><button id="tr_rss"></button></a>
+    {% endif %}
+
+    <span id="tr_clear"></span>
+
+    {% from "_includes/_defaults.html" import BAIDU_CUSTOM_SEARCH, BAIDU_SEARCH_DOMAIN with context %}
+    {% from "_includes/_defaults.html" import GOOGLE_CUSTOM_SEARCH, GOOGLE_SEARCH_DOMAIN with context %}
+    {% from "_includes/_defaults.html" import SEARCH_QUERY_URL, SEARCH_QUERY_KEY with context %}
+
+    {% if BAIDU_CUSTOM_SEARCH %}
+    <form id="tr_s_f" method="get" action="{{ BAIDU_SEARCH_DOMAIN }}/cse/search" target="_blank">
+      <input value="{{ BAIDU_CUSTOM_SEARCH }}" name="s" type="hidden"/>
+      <input id="tr_search" style="" name="q" type="text"/>
+    </form>
+    {% elif GOOGLE_CUSTOM_SEARCH %}
+    <form id="tr_s_f" method="get" action="{{ GOOGLE_SEARCH_DOMAIN }}/cse" target="_blank">
+      <input value="{{ GOOGLE_CUSTOM_SEARCH }}" name="cx" type="hidden"/>
+      <input id="tr_search" style="" name="q" type="text"/>
+    </form>
+    {% elif SEARCH_QUERY_URL %}
+    <form id="tr_s_f" method="get" action="{{ SEARCH_QUERY_URL }}">
+      <input id="tr_search" type="text" name="{{ SEARCH_QUERY_KEY }}" placeholder="" size="10" />
+    </form>
+    {% endif %}
+  </div>
+<div class="clearfix"></div>
+</hgroup>
+
+<div id="float" >
+
+  <!-- Set Logo image URL -->
+  {% from "_includes/_defaults.html" import SITE_ICON with context %}
+  <a href="{{ SITEURL }}/" title="{{ SITENAME }}" rel="home"><img id="logo" title="{{ SITENAME }}" src="{{ SITE_ICON }}" ></a>
+
+  <!-- Copy and add nav item -->
+  <nav id="nav" role="navigation"><div class="menu-container">
+    <ul class="menu">
+    {% for cat, null in categories %}
+      <li class="menu-item{% if cat == category %} active{% endif %}"><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+    {% endfor %}
+    </ul>
+  </div></nav>
+
+  <nav id="next" role="sencond_navigation"><div class="menu-container">
+    <ul class="menu">
+      {% if DISPLAY_PAGES_ON_MENU %}
+      {% for p in PAGES %}
+      <li class="menu-item{% if cat == category %} active{% endif %}"><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+      {% endfor %}
+      {% endif %}
+      {% if MENUITEMS %}
+      {% for title, link in MENUITEMS %}
+      <li class="menu-item"><a href="{{ link }}">{{ title }}</a></li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+  </div></nav>
+</div>
+
+<div id="ctn">
+<div id="content">
+
+{% block content %}
+{% endblock %}
+
+</div>
+</div>
+
+<!-- == Footer Start == -->
+{% from "_includes/_defaults.html" import CUSTOM_SIDEBAR with context %}
+{% if CUSTOM_SIDEBAR %}
+{% include "custom/sidebar.html" %}
+{% else %}
+{% include "_includes/sidebar.html" %}
+{% endif %}
+
+{% include "_includes/footer.html" %}
+</div>
+
+{% include "_includes/tailscripts.html" %}
+{% block tailscripts %}
+{% endblock %}
+
+</body>
+</html>

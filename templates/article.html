@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% from "_includes/article.html" import article_skeleton with context %}
+{% from "_includes/comment.html" import make_comment_box with context %}
+
+{% block head %}
+  {{ super() }}
+  {% for keyword in article.keywords %}
+  <meta name="keywords" contents="{{keyword}}" />
+  {% endfor %}
+  {% for description in article.description %}
+  <meta name="description" contents="{{description}}" />
+  {% endfor %}
+  {% for tag in article.tags %}
+  <meta name="tags" contents="{{tag}}" />
+  {% endfor %}
+{% endblock %}
+{% block subtitle %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<article class="post type-post status-publish format-standard hentry">
+
+  {{ article_skeleton(article, False) }}
+
+  {% if article.prev_article or article.next_article %}
+  <nav id="post_nav">
+    {% if article.prev_article %}
+    <span id="p_n_l"><a rel="prev" href="{{ SITEURL }}/{{ article.prev_article.url }}">← {{ article.prev_article.title }}</a></span>
+    {% endif %}
+    {% if article.next_article %}
+    <span id="p_n_r"><a rel="next" href="{{ SITEURL }}/{{ article.next_article.url }}">{{ article.next_article.title }} →</a></span>
+    {% endif %}
+  </nav>
+  {% endif %}
+
+  <div class="related_posts" id="related_posts">
+    {% from "_includes/_defaults.html" import RELATED_POSTS_LABEL with context %}
+    {% if article.related_posts %}
+    <h1>{{ RELATED_POSTS_LABEL }}</h1>
+    <ul>
+    {% for related_post in article.related_posts %}
+        <li><a href="{{ SITEURL }}/{{ related_post.url }}">{{ related_post.title }}</a></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+  <a name="comment"></a>
+  {{ make_comment_box(article, 'post') }}
+</article>
+{% endblock %}

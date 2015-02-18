@@ -1,0 +1,18 @@
+{% extends "_includes/article_list.html" %}
+{% from "_includes/_defaults.html" import ARCHIVES_LABEL with context %}
+{% block subtitle %}{{ subcategory.name }} {{ ARCHIVES_LABEL }}{% endblock %}
+
+{% macro category_link(category, islast=False) %}
+  {% if category.parent %}
+    {{ category_link(category.parent) }}
+  {% endif %}
+  {% if islast %}
+  <span>{{ category.shortname or category.name }}</span>
+  {% else %}
+  <span><a href="{{ SITEURL }}/{{ category.url }}">{{ category.shortname or category.name }}</a> /</span>
+  {% endif %}
+{% endmacro %}
+
+{% block content_title %}
+  <div class="heading">{{ category_link(subcategory, islast=True) }} {{ ARCHIVES_LABEL }}</div>
+{% endblock %}
